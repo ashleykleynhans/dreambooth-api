@@ -57,14 +57,14 @@ python3 create_model.py
 Once you have created your new Dreambooth model for
 training, you need to configure it.
 
-You can do this by editing the `create_model_config.py` script,
+You can do this by editing the `set_model_config.py` script,
 updating `URL` to the URL of your Stable Diffusion WebUI
 instance, updating the rest of the variables to your
 requirements for training purposes, and then running the
 script:
 
 ```bash
-python3 create_model_config.py
+python3 set_model_config.py
 ```
 
 ## Step 5 - Start training your Dreambooth model
