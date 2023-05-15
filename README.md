@@ -1,4 +1,4 @@
-# Sample REST API scripts for the Dreambooth Extension to the Stable Diffusion WebUI
+# A collection of Python scripts for calling the REST API for the Dreambooth extension to the Automatic1111 Stable Diffusion WebUI
 
 ## Step 1 - Clone the repository
 
