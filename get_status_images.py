@@ -11,11 +11,17 @@ def get_status():
     )
 
     if r.status_code == 200:
-        filename = r.headers.get('content-disposition').split('=')[1]
+        content_disposition = r.headers.get('content-disposition')
 
-        with open(filename, 'wb') as f:
-            print(f'Saving: {filename}')
-            f.write(r.content)
+        if content_disposition is None:
+            resp_json = r.json()
+            print(resp_json['message'])
+        else:
+            filename = content_disposition.split('=')[1]
+
+            with open(filename, 'wb') as f:
+                print(f'Saving: {filename}')
+                f.write(r.content)
 
 
 if __name__ == '__main__':
