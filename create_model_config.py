@@ -198,7 +198,7 @@ PAYLOAD = {
 }
 
 
-def model_config():
+def create_model_config():
     endpoint = f'{URL}/dreambooth/model_config'
 
     r = requests.post(
@@ -212,4 +212,4 @@ def model_config():
 
 
 if __name__ == '__main__':
-    model_config()
+    create_model_config()

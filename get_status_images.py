@@ -26,7 +26,7 @@ def get_zip_file(response):
             f.write(response.content)
 
 
-def get_status():
+def get_status_images():
     endpoint = f'{URL}/dreambooth/status_images'
 
     r = requests.get(
@@ -46,4 +46,4 @@ def get_status():
 
 
 if __name__ == '__main__':
-    get_status()
+    get_status_images()

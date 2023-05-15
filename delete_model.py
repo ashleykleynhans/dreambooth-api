@@ -1,23 +1,23 @@
 #!/usr/bin/env python3
-import json
 import requests
 
+# FIXME: Not sure what this is trying to delete, because
+# it returns an HTTP 404 Not Found
 URL = 'http://172.30.61.140:7860'
 MODEL_NAME = 'PROTOGEN-TEST'
 
 
-def get_model_config():
-    endpoint = f'{URL}/dreambooth/model_config'
+def delete_model():
+    endpoint = f'{URL}/dreambooth/mopel'
     endpoint += f'?model_name={MODEL_NAME}'
 
-    r = requests.get(
+    r = requests.delete(
         endpoint
     )
 
     print(r.status_code)
-    response_text = r.json()
-    print(json.dumps(response_text, indent=4, default=str))
+    print(r.content)
 
 
 if __name__ == '__main__':
-    get_model_config()
+    delete_model()
