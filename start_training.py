@@ -2,7 +2,6 @@
 import requests
 
 URL = 'http://172.30.61.140:7860'
-
 MODEL_NAME = 'PROTOGEN-TEST'
 
 
