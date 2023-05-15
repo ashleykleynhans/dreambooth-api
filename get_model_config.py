@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 import json
 import requests
+
 URL = 'http://172.30.61.140:7860'
+MODEL_NAME = 'PROTOGEN-TEST'
 
 
 def get_status():
-    endpoint = f'{URL}/dreambooth/status'
+    endpoint = f'{URL}/dreambooth/model_config'
+    endpoint += f'?model_name={MODEL_NAME}'
 
     r = requests.get(
         endpoint
