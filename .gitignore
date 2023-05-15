@@ -1,2 +1,4 @@
+.DS_Store
 .idea
 venv
+status_sample_images*

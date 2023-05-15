@@ -12,6 +12,7 @@ def get_status():
         endpoint
     )
 
+    print(r.status_code)
     response_text = r.json()
     print(json.dumps(response_text, indent=4, default=str))
 
