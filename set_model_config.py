@@ -13,6 +13,12 @@ SCHEDULER_TYPES = {
     'DEISMULTISTEP': 'DEISMultistep'
 }
 
+NOISE_SCHEDULER_TYPES = {
+    'DDPM': 'DDPM',
+    'DEIS': 'DEIS',
+    'UNIPC': 'UniPC'
+}
+
 URL = 'http://172.30.61.140:7860'
 WEBUI_INSTALLATION_PATH = '/home/ubuntu/stable-diffusion-webui'
 
@@ -41,7 +47,7 @@ TRAIN_IMAGIC_ONLY = False
 TRAINING_STEPS_PER_IMAGE = 150
 PAUSE_AFTER_N_EPOCHS = 0
 AMOUNT_OF_TIME_TO_PAUSE_BETWEEN_EPOCHS = 0
-SAVE_MODEL_FREQUENCY = 25
+SAVE_MODEL_FREQUENCY = 15
 SAVE_PREVIEW_FREQUENCY = 5
 
 #######################################################
@@ -175,6 +181,36 @@ GENERATE_CKPT_DURING_TRAINING = True
 GENERATE_CKPT_WHEN_TRAINING_COMPLETES = True
 GENERATE_CKPT_WHEN_TRAINING_IS_CANCELED = True
 SAVE_SAFETENSORS = True
+#######################################################
+# Lora
+#######################################################
+LORA_UNET_RANK = 4
+LORA_TEXT_ENCODER_RANK = 4
+LORA_WEIGHT = 1
+LORA_TEXT_WEIGHT = 1
+GENERATE_LORA_WEIGHTS_WHEN_SAVING_DURING_TRAINING = False
+GENERATE_LORA_WEIGHTS_WHEN_TRAINING_COMPLETES = True
+GENERATE_LORA_WEIGHTS_WHEN_TRAINING_IS_CANCELED = False
+GENERATE_LORA_WEIGHTS_FOR_EXTRA_NETWORKS = False
+#######################################################
+# Diffusion Weights (training snapshots)
+#######################################################
+SAVE_SEPARATE_DIFFUSERS_SNAPSHOTS_WHEN_SAVING_DURING_TRAINING = False
+SAVE_SEPARATE_DIFFUSERS_SNAPSHOTS_WHEN_TRAINING_COMPLETES = False
+SAVE_SEPARATE_DIFFUSERS_SNAPSHOTS_WHEN_TRAINING_IS_CANCELED = False
+
+#######################################################
+# Experimental Settings
+#######################################################
+TOKEN_MERGING = 0
+CALCULATE_SPLIT_LOSS = True
+DISABLE_CLASS_MATCHING = False
+DISABLE_LOGGING = False
+DETERMINISTIC = False
+USE_EMA_FOR_PREDICTION = False
+LORA_USE_BUGGY_REQUIRES_GRAD = False
+NOISE_SCHEDULER = NOISE_SCHEDULER_TYPES['DDPM']
+
 
 CONCEPTS = [
     {
@@ -207,10 +243,10 @@ PAYLOAD = {
     'concepts_list': CONCEPTS,
     'concepts_path': CONCEPTS_LIST_PATH,
     'custom_model_name': CUSTOM_MODEL_NAME,
-    'deterministic': False,
-    'disable_class_matching': False,
-    'disable_logging': False,
-    'ema_predict': False,
+    'deterministic': DETERMINISTIC,
+    'disable_class_matching': DISABLE_CLASS_MATCHING,
+    'disable_logging': DISABLE_LOGGING,
+    'ema_predict': USE_EMA_FOR_PREDICTION,
     'epoch': MODEL_EPOCH,
     'epoch_pause_frequency': PAUSE_AFTER_N_EPOCHS,
     'epoch_pause_time': AMOUNT_OF_TIME_TO_PAUSE_BETWEEN_EPOCHS,
@@ -223,18 +259,18 @@ PAYLOAD = {
     'has_ema': HAS_EMA,
     'hflip': APPLY_HORIZONTAL_FLIP,
     'infer_ema': False,
-    'initial_revision': 0,
+    'initial_revision': MODEL_REVISION,
     'learning_rate': LEARNING_RATE,
     'learning_rate_min': 0.000001,
-    'lifetime_revision': 0,
+    'lifetime_revision': MODEL_REVISION,
     'lora_learning_rate': LORA_UNET_LEARNING_RATE,
     'lora_model_name': '',
     'lora_txt_learning_rate': LORA_TEXT_ENCODER_LEARNING_RATE,
-    'lora_txt_rank': 4,
-    'lora_txt_weight': 1,
-    'lora_unet_rank': 4,
-    'lora_weight': 1,
-    'lora_use_buggy_requires_grad': False,
+    'lora_txt_rank': LORA_TEXT_ENCODER_RANK,
+    'lora_txt_weight': LORA_TEXT_WEIGHT,
+    'lora_unet_rank': LORA_UNET_RANK,
+    'lora_weight': LORA_WEIGHT,
+    'lora_use_buggy_requires_grad': LORA_USE_BUGGY_REQUIRES_GRAD,
     'lr_cycles': 1,
     'lr_factor': LEARNING_RATE_CONSTANT_LINEAR_STARTING_FACTOR,
     'lr_power': 1,
@@ -246,7 +282,7 @@ PAYLOAD = {
     'model_dir': f'{WEBUI_INSTALLATION_PATH}/models/dreambooth/{MODEL_NAME}',
     'model_name': MODEL_NAME,
     'model_path': f'{WEBUI_INSTALLATION_PATH}/models/dreambooth/{MODEL_NAME}',
-    'noise_scheduler': 'DDPM',
+    'noise_scheduler': NOISE_SCHEDULER,
     'num_train_epochs': TRAINING_STEPS_PER_IMAGE,
     'offset_noise': OFFSET_NOISE,
     'optimizer': OPTIMIZER,
@@ -267,27 +303,27 @@ PAYLOAD = {
     'save_ckpt_during': GENERATE_CKPT_DURING_TRAINING,
     'save_ema': SAVE_EMA_WEIGHTS_TO_GENERATED_MODELS,
     'save_embedding_every': SAVE_MODEL_FREQUENCY,
-    'save_lora_after': True,
-    'save_lora_cancel': False,
-    'save_lora_during': False,
-    'save_lora_for_extra_net': False,
+    'save_lora_after': GENERATE_LORA_WEIGHTS_WHEN_TRAINING_COMPLETES,
+    'save_lora_cancel': GENERATE_LORA_WEIGHTS_WHEN_TRAINING_IS_CANCELED,
+    'save_lora_during': GENERATE_LORA_WEIGHTS_WHEN_SAVING_DURING_TRAINING,
+    'save_lora_for_extra_net': GENERATE_LORA_WEIGHTS_FOR_EXTRA_NETWORKS,
     'save_preview_every': SAVE_PREVIEW_FREQUENCY,
     'save_safetensors': SAVE_SAFETENSORS,
-    'save_state_after': False,
-    'save_state_cancel': False,
-    'save_state_during': False,
+    'save_state_after': SAVE_SEPARATE_DIFFUSERS_SNAPSHOTS_WHEN_TRAINING_COMPLETES,
+    'save_state_cancel': SAVE_SEPARATE_DIFFUSERS_SNAPSHOTS_WHEN_TRAINING_IS_CANCELED,
+    'save_state_during': SAVE_SEPARATE_DIFFUSERS_SNAPSHOTS_WHEN_SAVING_DURING_TRAINING,
     'scheduler': SCHEDULER,
     'shared_diffusers_path': '',
     'shuffle_tags': SHUFFLE_TAGS,
     'snapshot': '',
-    'split_loss': True,
+    'split_loss': CALCULATE_SPLIT_LOSS,
     'src': SOURCE_CHECKPOINT,
     'stop_text_encoder': STEP_RATIO_OF_TEXT_ENCODER_TRAINING,
     'strict_tokens': STRICT_TOKENS,
     'dynamic_img_norm': DYNAMIC_IMAGE_NORMALIZATION,
     'tenc_weight_decay': TENC_WEIGHT_DECAY,
     'tenc_grad_clip_norm': TENC_GRADIENT_CLIP_NORM,
-    'tomesd': 0,
+    'tomesd': TOKEN_MERGING,
     'train_batch_size': BATCH_SIZE,
     'train_imagic': TRAIN_IMAGIC_ONLY,
     'train_unet': TRAIN_UNET,
