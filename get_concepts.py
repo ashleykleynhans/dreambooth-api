@@ -7,6 +7,7 @@ import requests
 URL = 'http://172.30.61.140:7860'
 MODEL_NAME = 'PROTOGEN-TEST'
 
+
 def get_concepts():
     endpoint = f'{URL}/dreambooth/concepts'
     endpoint += f'?model_name={MODEL_NAME}'
