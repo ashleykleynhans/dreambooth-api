@@ -38,7 +38,7 @@ SOURCE_CHECKPOINT = '/models/ckpt/v1-5-pruned.safetensors'
 MODEL_REVISION = 0
 MODEL_EPOCH = 0
 V2_MODEL = False
-HAS_EMA = False
+HAS_EMA = True
 TRAIN_UNFROZEN = False
 SCHEDULER = SCHEDULER_TYPES['DDIM']
 
@@ -52,7 +52,7 @@ TRAIN_IMAGIC_ONLY = False
 #######################################################
 # Intervals
 #######################################################
-TRAINING_STEPS_PER_IMAGE = 200
+TRAINING_STEPS_PER_IMAGE = 150
 PAUSE_AFTER_N_EPOCHS = 0
 AMOUNT_OF_TIME_TO_PAUSE_BETWEEN_EPOCHS = 0
 SAVE_MODEL_FREQUENCY = 25
@@ -162,7 +162,7 @@ SAMPLE_PROMPT_TEMPLATE_FILE = ''
 #######################################################
 CLASS_IMAGES_PER_INSTANCE_IMAGE = 50
 CLASSIFICATION_CFG_SCALE = 7.5
-CLASSIFICATION_STEPS = 60
+CLASSIFICATION_STEPS = 40
 #######################################################
 # Sample Image Generation
 #######################################################
@@ -266,7 +266,7 @@ PAYLOAD = {
     'half_model': HALF_MODEL,
     'has_ema': HAS_EMA,
     'hflip': APPLY_HORIZONTAL_FLIP,
-    'infer_ema': False,
+    'infer_ema': USE_EMA_WEIGHTS_FOR_INFERENCE,
     'initial_revision': MODEL_REVISION,
     'learning_rate': LEARNING_RATE,
     'learning_rate_min': 0.000001,
@@ -338,7 +338,7 @@ PAYLOAD = {
     'train_unfrozen': TRAIN_UNFROZEN,
     'txt_learning_rate': TEXT_ENCODER_LEARNING_RATE,
     'use_concepts': USE_CONCEPTS_LIST,
-    'use_ema': USE_EMA_WEIGHTS_FOR_INFERENCE,
+    'use_ema': USE_EMA,
     'use_lora': USE_LORA,
     'use_lora_extended': USE_LORA_EXTENDED,
     'use_shared_src': False,
