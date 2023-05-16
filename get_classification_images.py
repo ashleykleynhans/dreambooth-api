@@ -35,14 +35,13 @@ def get_classification_images():
     print(r.status_code)
 
     if r.status_code == 200:
-        print(r.headers)
-        # content_type = r.headers.get('content-type')
-        #
-        # if content_type == '':
-        #     get_zip_file(r)
-        # else:
-        #     resp_json = r.json()
-        #     print(resp_json['message'])
+        content_type = r.headers.get('content-type')
+
+        if content_type == 'application/x-zip-compressed':
+            get_zip_file(r)
+        else:
+            resp_json = r.json()
+            print(resp_json['message'])
     else:
         resp_json = r.json()
         print(json.dumps(resp_json, indent=4, default=str))

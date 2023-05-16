@@ -38,7 +38,7 @@ def get_status_images():
 
         if content_type == 'image/png':
             get_image(r)
-        elif content_type == '':
+        elif content_type == 'application/x-zip-compressed':
             get_zip_file(r)
         else:
             resp_json = r.json()
