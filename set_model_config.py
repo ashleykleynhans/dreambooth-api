@@ -5,7 +5,15 @@ import requests
 
 LEARNING_RATE_SCHEDULER_TYPES = {
     'CONSTANT': 'constant',
-    'CONSTANT_WITH_WARMUP': 'constant_with_warmup'
+    'CONSTANT_WITH_WARMUP': 'constant_with_warmup',
+    'COSINE': 'cosine',
+    'COSINE_ANNEALING': 'cosine_annealing',
+    'COSINE_ANNEALING_WITH_RESTARTS': 'cosine_annealing_with_restarts',
+    'COSINE_WITH_RESTARTS': 'cosine_with_restarts',
+    'DEDAPT_WITH_WARMUP': 'dadapt_with_warmup',
+    'LINEAR': 'linear',
+    'LINEAR_WITH_WARMUP': 'linear_with_warmup',
+    'POLYNOMIAL': 'polynomial'
 }
 
 SCHEDULER_TYPES = {
@@ -44,10 +52,10 @@ TRAIN_IMAGIC_ONLY = False
 #######################################################
 # Intervals
 #######################################################
-TRAINING_STEPS_PER_IMAGE = 150
+TRAINING_STEPS_PER_IMAGE = 200
 PAUSE_AFTER_N_EPOCHS = 0
 AMOUNT_OF_TIME_TO_PAUSE_BETWEEN_EPOCHS = 0
-SAVE_MODEL_FREQUENCY = 15
+SAVE_MODEL_FREQUENCY = 25
 SAVE_PREVIEW_FREQUENCY = 5
 
 #######################################################
@@ -62,8 +70,8 @@ GRADIENT_CHECKPOINTING = True
 #######################################################
 # Learning Rate
 #######################################################
-LEARNING_RATE = 0.000001
-TEXT_ENCODER_LEARNING_RATE = 0.000001
+LEARNING_RATE = 0.000002
+TEXT_ENCODER_LEARNING_RATE = 0.000002
 LORA_UNET_LEARNING_RATE = 0.000001
 LORA_TEXT_ENCODER_LEARNING_RATE = 0.000005
 LEARNING_RATE_SCHEDULER = LEARNING_RATE_SCHEDULER_TYPES['CONSTANT']
@@ -106,7 +114,7 @@ MAX_TOKEN_LENGTH = 75
 # Prior Loss
 #######################################################
 SCALE_PRIOR_LOSS = False
-PRIOR_LOSS_WEIGHT = 0.75
+PRIOR_LOSS_WEIGHT = 1
 PRIOR_LOSS_TARGET = 100
 MINIMUM_PRIOR_LOSS_WEIGHT = 0.1
 
@@ -154,7 +162,7 @@ SAMPLE_PROMPT_TEMPLATE_FILE = ''
 #######################################################
 CLASS_IMAGES_PER_INSTANCE_IMAGE = 20
 CLASSIFICATION_CFG_SCALE = 7.5
-CLASSIFICATION_STEPS = 40
+CLASSIFICATION_STEPS = 60
 #######################################################
 # Sample Image Generation
 #######################################################
