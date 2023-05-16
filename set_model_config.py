@@ -1,42 +1,52 @@
 #!/usr/bin/env python3
 import json
 import requests
+from enum import Enum
 
 
-LEARNING_RATE_SCHEDULER_TYPES = {
-    'CONSTANT': 'constant',
-    'CONSTANT_WITH_WARMUP': 'constant_with_warmup',
-    'COSINE': 'cosine',
-    'COSINE_ANNEALING': 'cosine_annealing',
-    'COSINE_ANNEALING_WITH_RESTARTS': 'cosine_annealing_with_restarts',
-    'COSINE_WITH_RESTARTS': 'cosine_with_restarts',
-    'DEDAPT_WITH_WARMUP': 'dadapt_with_warmup',
-    'LINEAR': 'linear',
-    'LINEAR_WITH_WARMUP': 'linear_with_warmup',
-    'POLYNOMIAL': 'polynomial'
-}
+class LearningRateScheduler(Enum):
+    CONSTANT = 'constant'
+    CONSTANT_WITH_WARMUP = 'constant_with_warmup'
+    COSINE = 'cosine'
+    COSINE_ANNEALING = 'cosine_annealing'
+    COSINE_ANNEALING_WITH_RESTARTS = 'cosine_annealing_with_restarts'
+    COSINE_WITH_RESTARTS = 'cosine_with_restarts'
+    DEDAPT_WITH_WARMUP = 'dadapt_with_warmup'
+    LINEAR = 'linear'
+    LINEAR_WITH_WARMUP = 'linear_with_warmup'
+    POLYNOMIAL = 'polynomial'
 
-SCHEDULER_TYPES = {
-    'DDIM': 'DDIM',
-    'DDPM': 'DDPM',
-    'PNDM': 'PNDM',
-    'LMSDiscrete': 'LMSDiscrete',
-    'EulerDiscrete': 'EulerDiscrete',
-    'HeunDiscrete': 'HeunDiscrete',
-    'EulerAncestralDiscrete': 'EulerAncestralDiscrete',
-    'DPMSolverMultistep': 'DPMSolverMultistep',
-    'DPMSolverSinglestep': 'DPMSolverSinglestep',
-    'KDPM2Discrete': 'KDPM2Discrete',
-    'KDPM2AncestralDiscrete': 'KDPM2AncestralDiscrete',
-    'DEISMultistep': 'DEISMultistep',
-    'UniPCMultistep': 'UniPCMultistep'
-}
 
-NOISE_SCHEDULER_TYPES = {
-    'DDPM': 'DDPM',
-    'DEIS': 'DEIS',
-    'UniPC': 'UniPC'
-}
+class Scheduler(Enum):
+    DDIM = 'DDIM'
+    DDPM = 'DDPM'
+    PNDM = 'PNDM'
+    LMSDiscrete = 'LMSDiscrete'
+    EulerDiscrete = 'EulerDiscrete'
+    HeunDiscrete = 'HeunDiscrete'
+    EulerAncestralDiscrete = 'EulerAncestralDiscrete'
+    DPMSolverMultistep = 'DPMSolverMultistep'
+    DPMSolverSinglestep = 'DPMSolverSinglestep'
+    KDPM2Discrete = 'KDPM2Discrete'
+    KDPM2AncestralDiscrete = 'KDPM2AncestralDiscrete'
+    DEISMultistep = 'DEISMultistep'
+    UniPCMultistep = 'UniPCMultistep'
+
+
+class NoiseScheduler(Enum):
+    DDPM = 'DDPM'
+    DEIS = 'DEIS'
+    UniPC = 'UniPC'
+
+
+class Optimizer(Enum):
+    Torch_AdamW = 'Torch AdamW'
+    _8bit_AdamW = '8bit AdamW'
+    Lion = 'Lion'
+    AdamW_Dadaptation = 'AdamW Dadaptation'
+    Adan_Dadaptation = 'Adan Dadaptation'
+    AdanIP_Dadaptation = 'AdanIP Dadaptation'
+
 
 URL = 'http://172.30.61.140:7860'
 WEBUI_INSTALLATION_PATH = '/home/ubuntu/stable-diffusion-webui'
@@ -50,8 +60,8 @@ MODEL_REVISION = 0
 MODEL_EPOCH = 0
 V2_MODEL = False
 HAS_EMA = False
-TRAIN_UNFROZEN = False
-SCHEDULER = SCHEDULER_TYPES['DDIM']
+TRAIN_UNFROZEN = True
+SCHEDULER = Scheduler.DDIM
 
 #######################################################
 # General
@@ -63,10 +73,11 @@ TRAIN_IMAGIC_ONLY = False
 #######################################################
 # Intervals
 #######################################################
-TRAINING_STEPS_PER_IMAGE = 100
+# 150 recommended for a person
+TRAINING_STEPS_PER_IMAGE = 200
 PAUSE_AFTER_N_EPOCHS = 0
 AMOUNT_OF_TIME_TO_PAUSE_BETWEEN_EPOCHS = 0
-SAVE_MODEL_FREQUENCY = 25
+SAVE_MODEL_FREQUENCY = 10
 SAVE_PREVIEW_FREQUENCY = 5
 
 #######################################################
@@ -76,16 +87,16 @@ BATCH_SIZE = 1
 GRADIENT_ACCUMULATION_STEPS = 1
 CLASS_BATCH_SIZE = 1
 SET_GRADIENT_TO_NONE_WHEN_ZEROING = True
-GRADIENT_CHECKPOINTING = True
+GRADIENT_CHECKPOINTING = False
 
 #######################################################
 # Learning Rate
 #######################################################
-LEARNING_RATE = 0.000002
-TEXT_ENCODER_LEARNING_RATE = 0.000002
+LEARNING_RATE = 0.000001
+TEXT_ENCODER_LEARNING_RATE = 0.000001
 LORA_UNET_LEARNING_RATE = 0.000001
 LORA_TEXT_ENCODER_LEARNING_RATE = 0.000005
-LEARNING_RATE_SCHEDULER = LEARNING_RATE_SCHEDULER_TYPES['CONSTANT_WITH_WARMUP']
+LEARNING_RATE_SCHEDULER = LearningRateScheduler.CONSTANT
 #######################################################
 # Constant with Warmup Learning Rate Settings
 #######################################################
@@ -93,8 +104,8 @@ LEARNING_RATE_WARMUP_STEPS = 0
 #######################################################
 # OR Constant Learning Rate Settings
 #######################################################
-LEARNING_RATE_CONSTANT_LINEAR_STARTING_FACTOR = 1
-LEARNING_RATE_SCALE_POSITION = 1
+LEARNING_RATE_CONSTANT_LINEAR_STARTING_FACTOR = 0.5
+LEARNING_RATE_SCALE_POSITION = 0.5
 #######################################################
 
 #######################################################
@@ -103,8 +114,8 @@ LEARNING_RATE_SCALE_POSITION = 1
 MAX_RESOLUTION = 512
 APPLY_HORIZONTAL_FLIP = False
 DYNAMIC_IMAGE_NORMALIZATION = False
-USE_EMA = False
-OPTIMIZER = '8bit AdamW'
+USE_EMA = True
+OPTIMIZER = Optimizer.Lion
 MIXED_PRECISION = 'fp16'
 MEMORY_ATTENTION = 'xformers'
 CACHE_LATENTS = True
@@ -125,8 +136,8 @@ MAX_TOKEN_LENGTH = 75
 # Prior Loss
 #######################################################
 SCALE_PRIOR_LOSS = False
-PRIOR_LOSS_WEIGHT = 1
-PRIOR_LOSS_TARGET = 75
+PRIOR_LOSS_WEIGHT = 0.75
+PRIOR_LOSS_TARGET = 100
 MINIMUM_PRIOR_LOSS_WEIGHT = 0.1
 
 #######################################################
@@ -171,7 +182,9 @@ SAMPLE_PROMPT_TEMPLATE_FILE = ''
 #######################################################
 # Class Image Generation
 #######################################################
-CLASS_IMAGES_PER_INSTANCE_IMAGE = 0
+# Community recommends 300, Dreambooth paper uses 200
+# 300 / Number of training images
+CLASS_IMAGES_PER_INSTANCE_IMAGE = 60
 CLASSIFICATION_CFG_SCALE = 7.5
 CLASSIFICATION_STEPS = 40
 #######################################################
@@ -196,9 +209,9 @@ USE_EMA_WEIGHTS_FOR_INFERENCE = False
 #######################################################
 HALF_MODEL = False
 SAVE_CHECKPOINT_TO_SUBDIRECTORY = True
-GENERATE_CKPT_DURING_TRAINING = True
+GENERATE_CKPT_DURING_TRAINING = False
 GENERATE_CKPT_WHEN_TRAINING_COMPLETES = True
-GENERATE_CKPT_WHEN_TRAINING_IS_CANCELED = True
+GENERATE_CKPT_WHEN_TRAINING_IS_CANCELED = False
 SAVE_SAFETENSORS = True
 #######################################################
 # Lora
@@ -224,11 +237,11 @@ SAVE_SEPARATE_DIFFUSERS_SNAPSHOTS_WHEN_TRAINING_IS_CANCELED = False
 TOKEN_MERGING = 0
 CALCULATE_SPLIT_LOSS = True
 DISABLE_CLASS_MATCHING = False
-DISABLE_LOGGING = False
+DISABLE_LOGGING = True
 DETERMINISTIC = False
-USE_EMA_FOR_PREDICTION = False
+USE_EMA_FOR_PREDICTION = True
 LORA_USE_BUGGY_REQUIRES_GRAD = False
-NOISE_SCHEDULER = NOISE_SCHEDULER_TYPES['DDPM']
+NOISE_SCHEDULER = NoiseScheduler.DEIS
 
 
 CONCEPTS = [
