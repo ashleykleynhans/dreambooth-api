@@ -5,7 +5,7 @@ import requests
 # FIXME: TypeError: Object of type Concept is not JSON serializable
 
 URL = 'http://172.30.61.140:7860'
-MODEL_NAME = 'PROTOGEN-TEST'
+MODEL_NAME = 'test-model'
 
 
 def get_concepts():

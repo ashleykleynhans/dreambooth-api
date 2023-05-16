@@ -3,7 +3,7 @@ import json
 import requests
 
 URL = 'http://172.30.61.140:7860'
-MODEL_NAME = 'PROTOGEN-TEST'
+MODEL_NAME = 'test-model'
 IMAGE_GENERATION_LIBRARY = ''
 
 

@@ -3,8 +3,8 @@ import requests
 import re
 
 URL = 'http://172.30.61.140:7860'
-NEW_MODEL_NAME = 'PROTOGEN-TEST'
-SRC_MODEL = 'ProtoGen_X5.8.safetensors'
+NEW_MODEL_NAME = 'test-model'
+SRC_MODEL = 'v1-5-pruned.safetensors'
 
 
 def create_model():
