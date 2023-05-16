@@ -31,6 +31,7 @@ def get_classification_images():
     r = requests.get(
         endpoint
     )
+
     print(r.status_code)
 
     if r.status_code == 200:
