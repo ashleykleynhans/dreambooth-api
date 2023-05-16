@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import json
 import requests
 
 # FIXME: Not sure what this is trying to delete, because
@@ -15,8 +16,13 @@ def delete_model():
         endpoint
     )
 
-    print(r.status_code)
-    print(r.content)
+    if r.status_code == 200:
+        print(r.status_code)
+        print(r.content)
+    else:
+        print(r.status_code)
+        json_resp = r.json()
+        print(json.dumps(json_resp, indent=4, default=str))
 
 
 if __name__ == '__main__':

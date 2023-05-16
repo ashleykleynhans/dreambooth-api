@@ -35,6 +35,9 @@ def get_checkpoint():
         else:
             resp_json = r.json()
             print(resp_json)
+    else:
+        resp_json = r.json()
+        print(resp_json['message'])
 
 
 if __name__ == '__main__':
