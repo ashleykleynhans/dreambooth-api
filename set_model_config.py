@@ -160,7 +160,7 @@ SAMPLE_PROMPT_TEMPLATE_FILE = ''
 #######################################################
 # Class Image Generation
 #######################################################
-CLASS_IMAGES_PER_INSTANCE_IMAGE = 20
+CLASS_IMAGES_PER_INSTANCE_IMAGE = 50
 CLASSIFICATION_CFG_SCALE = 7.5
 CLASSIFICATION_STEPS = 60
 #######################################################
