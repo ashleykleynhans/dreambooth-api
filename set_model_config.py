@@ -17,14 +17,25 @@ LEARNING_RATE_SCHEDULER_TYPES = {
 }
 
 SCHEDULER_TYPES = {
-    'DDIM': 'ddim',
-    'DEISMULTISTEP': 'DEISMultistep'
+    'DDIM': 'DDIM',
+    'DDPM': 'DDPM',
+    'PNDM': 'PNDM',
+    'LMSDiscrete': 'LMSDiscrete',
+    'EulerDiscrete': 'EulerDiscrete',
+    'HeunDiscrete': 'HeunDiscrete',
+    'EulerAncestralDiscrete': 'EulerAncestralDiscrete',
+    'DPMSolverMultistep': 'DPMSolverMultistep',
+    'DPMSolverSinglestep': 'DPMSolverSinglestep',
+    'KDPM2Discrete': 'KDPM2Discrete',
+    'KDPM2AncestralDiscrete': 'KDPM2AncestralDiscrete',
+    'DEISMultistep': 'DEISMultistep',
+    'UniPCMultistep': 'UniPCMultistep'
 }
 
 NOISE_SCHEDULER_TYPES = {
     'DDPM': 'DDPM',
     'DEIS': 'DEIS',
-    'UNIPC': 'UniPC'
+    'UniPC': 'UniPC'
 }
 
 URL = 'http://172.30.61.140:7860'
@@ -38,7 +49,7 @@ SOURCE_CHECKPOINT = '/models/ckpt/v1-5-pruned.safetensors'
 MODEL_REVISION = 0
 MODEL_EPOCH = 0
 V2_MODEL = False
-HAS_EMA = True
+HAS_EMA = False
 TRAIN_UNFROZEN = False
 SCHEDULER = SCHEDULER_TYPES['DDIM']
 
@@ -52,7 +63,7 @@ TRAIN_IMAGIC_ONLY = False
 #######################################################
 # Intervals
 #######################################################
-TRAINING_STEPS_PER_IMAGE = 150
+TRAINING_STEPS_PER_IMAGE = 100
 PAUSE_AFTER_N_EPOCHS = 0
 AMOUNT_OF_TIME_TO_PAUSE_BETWEEN_EPOCHS = 0
 SAVE_MODEL_FREQUENCY = 25
@@ -115,7 +126,7 @@ MAX_TOKEN_LENGTH = 75
 #######################################################
 SCALE_PRIOR_LOSS = False
 PRIOR_LOSS_WEIGHT = 1
-PRIOR_LOSS_TARGET = 100
+PRIOR_LOSS_TARGET = 75
 MINIMUM_PRIOR_LOSS_WEIGHT = 0.1
 
 #######################################################
@@ -160,7 +171,7 @@ SAMPLE_PROMPT_TEMPLATE_FILE = ''
 #######################################################
 # Class Image Generation
 #######################################################
-CLASS_IMAGES_PER_INSTANCE_IMAGE = 50
+CLASS_IMAGES_PER_INSTANCE_IMAGE = 0
 CLASSIFICATION_CFG_SCALE = 7.5
 CLASSIFICATION_STEPS = 40
 #######################################################
