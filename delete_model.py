@@ -2,18 +2,23 @@
 import json
 import requests
 
-# FIXME: Not sure what this is trying to delete, because
-# it returns an HTTP 404 Not Found
+# TODO: Not currently working due to a bug in resolving
+# the model path - see https://github.com/d8ahazard/sd_dreambooth_extension/issues/1230
+
 URL = 'http://172.30.61.140:7860'
 MODEL_NAME = 'test-model'
 
 
 def delete_model():
-    endpoint = f'{URL}/dreambooth/mopel'
-    endpoint += f'?model_name={MODEL_NAME}'
+    endpoint = f'{URL}/dreambooth/model'
+
+    payload = {
+        'model_name': MODEL_NAME
+    }
 
     r = requests.delete(
-        endpoint
+        endpoint,
+        data=payload
     )
 
     if r.status_code == 200:
