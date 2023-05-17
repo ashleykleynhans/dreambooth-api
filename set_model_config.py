@@ -61,7 +61,7 @@ MODEL_EPOCH = 0
 V2_MODEL = False
 HAS_EMA = False
 TRAIN_UNFROZEN = True
-SCHEDULER = Scheduler.DDIM
+SCHEDULER = Scheduler.DDIM.value
 
 #######################################################
 # General
@@ -96,7 +96,7 @@ LEARNING_RATE = 0.000001
 TEXT_ENCODER_LEARNING_RATE = 0.000001
 LORA_UNET_LEARNING_RATE = 0.000001
 LORA_TEXT_ENCODER_LEARNING_RATE = 0.000005
-LEARNING_RATE_SCHEDULER = LearningRateScheduler.CONSTANT
+LEARNING_RATE_SCHEDULER = LearningRateScheduler.CONSTANT.value
 #######################################################
 # Constant with Warmup Learning Rate Settings
 #######################################################
@@ -115,7 +115,7 @@ MAX_RESOLUTION = 512
 APPLY_HORIZONTAL_FLIP = False
 DYNAMIC_IMAGE_NORMALIZATION = False
 USE_EMA = True
-OPTIMIZER = Optimizer.Lion
+OPTIMIZER = Optimizer.Lion.value
 MIXED_PRECISION = 'fp16'
 MEMORY_ATTENTION = 'xformers'
 CACHE_LATENTS = True
@@ -241,7 +241,7 @@ DISABLE_LOGGING = True
 DETERMINISTIC = False
 USE_EMA_FOR_PREDICTION = True
 LORA_USE_BUGGY_REQUIRES_GRAD = False
-NOISE_SCHEDULER = NoiseScheduler.DEIS
+NOISE_SCHEDULER = NoiseScheduler.DEIS.value
 
 
 CONCEPTS = [
