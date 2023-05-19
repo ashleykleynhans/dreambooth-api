@@ -2,16 +2,16 @@
 import requests
 import re
 
-URL = 'http://172.30.61.140:7860'
+URL = 'http://172.17.1.140:7860'
 NEW_MODEL_NAME = 'test-model'
 SRC_MODEL = 'v1-5-pruned.safetensors'
 SHARED_DIFFUSERS_SOURCE = ''
 CREATE_FROM_HUB = 'false'
 NEW_MODEL_HUB_URL = ''
 IS_512_RESOLUTION = 'true'
-TRAIN_UNFROZEN = 'true'
+TRAIN_UNFROZEN = 'false'
 HUGGINGFACE_HUB_TOKEN = ''
-NEW_MODEL_EXTRACT_EMA = 'true'
+NEW_MODEL_EXTRACT_EMA = 'false'
 
 
 def create_model():

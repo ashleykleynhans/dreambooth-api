@@ -40,15 +40,15 @@ class NoiseScheduler(Enum):
 
 
 class Optimizer(Enum):
-    Torch_AdamW = 'Torch AdamW'
-    _8bit_AdamW = '8bit AdamW'
+    AdamW_Torch = 'Torch AdamW'
+    AdamW_8bit = '8bit AdamW'
     Lion = 'Lion'
     AdamW_Dadaptation = 'AdamW Dadaptation'
     Adan_Dadaptation = 'Adan Dadaptation'
     AdanIP_Dadaptation = 'AdanIP Dadaptation'
 
 
-URL = 'http://172.30.61.140:7860'
+URL = 'http://172.17.1.140:7860'
 WEBUI_INSTALLATION_PATH = '/home/ubuntu/stable-diffusion-webui'
 
 #######################################################
@@ -60,7 +60,7 @@ MODEL_REVISION = 0
 MODEL_EPOCH = 0
 V2_MODEL = False
 HAS_EMA = False
-TRAIN_UNFROZEN = True
+TRAIN_UNFROZEN = False
 SCHEDULER = Scheduler.DDIM.value
 
 #######################################################
@@ -73,12 +73,11 @@ TRAIN_IMAGIC_ONLY = False
 #######################################################
 # Intervals
 #######################################################
-# 150 recommended for a person
 TRAINING_STEPS_PER_IMAGE = 200
 PAUSE_AFTER_N_EPOCHS = 0
 AMOUNT_OF_TIME_TO_PAUSE_BETWEEN_EPOCHS = 0
 SAVE_MODEL_FREQUENCY = 10
-SAVE_PREVIEW_FREQUENCY = 5
+SAVE_PREVIEW_FREQUENCY = 0
 
 #######################################################
 # Batching
@@ -92,11 +91,11 @@ GRADIENT_CHECKPOINTING = False
 #######################################################
 # Learning Rate
 #######################################################
-LEARNING_RATE = 0.000001
-TEXT_ENCODER_LEARNING_RATE = 0.000001
+LEARNING_RATE = 0.0000002
+TEXT_ENCODER_LEARNING_RATE = 0.0000002
 LORA_UNET_LEARNING_RATE = 0.000001
 LORA_TEXT_ENCODER_LEARNING_RATE = 0.000005
-LEARNING_RATE_SCHEDULER = LearningRateScheduler.CONSTANT.value
+LEARNING_RATE_SCHEDULER = LearningRateScheduler.CONSTANT_WITH_WARMUP.value
 #######################################################
 # Constant with Warmup Learning Rate Settings
 #######################################################
@@ -117,15 +116,15 @@ DYNAMIC_IMAGE_NORMALIZATION = False
 USE_EMA = True
 OPTIMIZER = Optimizer.Lion.value
 MIXED_PRECISION = 'fp16'
-MEMORY_ATTENTION = 'xformers'
+MEMORY_ATTENTION = 'default'
 CACHE_LATENTS = True
 TRAIN_UNET = True
 STEP_RATIO_OF_TEXT_ENCODER_TRAINING = 0.75
 OFFSET_NOISE = 0
 FREEZE_CLIP_NORMALIZATION_LAYERS = False
 CLIP_SKIP = 1
-WEIGHT_DECAY = 0.01
-TENC_WEIGHT_DECAY = 0.01
+WEIGHT_DECAY = 0.1
+TENC_WEIGHT_DECAY = 0.1
 TENC_GRADIENT_CLIP_NORM = 0
 PAD_TOKENS = True
 STRICT_TOKENS = False
@@ -182,9 +181,7 @@ SAMPLE_PROMPT_TEMPLATE_FILE = ''
 #######################################################
 # Class Image Generation
 #######################################################
-# Community recommends 300, Dreambooth paper uses 200
-# 300 / Number of training images
-CLASS_IMAGES_PER_INSTANCE_IMAGE = 60
+CLASS_IMAGES_PER_INSTANCE_IMAGE = 100
 CLASSIFICATION_CFG_SCALE = 7.5
 CLASSIFICATION_STEPS = 40
 #######################################################
@@ -209,7 +206,7 @@ USE_EMA_WEIGHTS_FOR_INFERENCE = False
 #######################################################
 HALF_MODEL = False
 SAVE_CHECKPOINT_TO_SUBDIRECTORY = True
-GENERATE_CKPT_DURING_TRAINING = False
+GENERATE_CKPT_DURING_TRAINING = True
 GENERATE_CKPT_WHEN_TRAINING_COMPLETES = True
 GENERATE_CKPT_WHEN_TRAINING_IS_CANCELED = False
 SAVE_SAFETENSORS = True
@@ -238,8 +235,8 @@ TOKEN_MERGING = 0
 CALCULATE_SPLIT_LOSS = True
 DISABLE_CLASS_MATCHING = False
 DISABLE_LOGGING = True
-DETERMINISTIC = False
-USE_EMA_FOR_PREDICTION = True
+DETERMINISTIC = True
+USE_EMA_FOR_PREDICTION = False
 LORA_USE_BUGGY_REQUIRES_GRAD = False
 NOISE_SCHEDULER = NoiseScheduler.DEIS.value
 
