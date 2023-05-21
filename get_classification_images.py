@@ -4,7 +4,7 @@ import requests
 
 # FIXME: This script is not working
 
-URL = 'http://172.30.61.140:7860'
+URL = 'http://172.17.1.140:7860'
 MODEL_NAME = 'test-model'
 CONCEPT_INDEX = -1
 

@@ -60,8 +60,8 @@ MODEL_REVISION = 0
 MODEL_EPOCH = 0
 V2_MODEL = False
 HAS_EMA = False
-TRAIN_UNFROZEN = False
-SCHEDULER = Scheduler.DDIM.value
+TRAIN_UNFROZEN = True
+SCHEDULER = Scheduler.DDPM.value
 
 #######################################################
 # General
@@ -91,8 +91,8 @@ GRADIENT_CHECKPOINTING = False
 #######################################################
 # Learning Rate
 #######################################################
-LEARNING_RATE = 0.0000002
-TEXT_ENCODER_LEARNING_RATE = 0.0000002
+LEARNING_RATE = 0.0000001
+TEXT_ENCODER_LEARNING_RATE = 0.0000001
 LORA_UNET_LEARNING_RATE = 0.000001
 LORA_TEXT_ENCODER_LEARNING_RATE = 0.000005
 LEARNING_RATE_SCHEDULER = LearningRateScheduler.CONSTANT_WITH_WARMUP.value
@@ -103,8 +103,8 @@ LEARNING_RATE_WARMUP_STEPS = 0
 #######################################################
 # OR Constant Learning Rate Settings
 #######################################################
-LEARNING_RATE_CONSTANT_LINEAR_STARTING_FACTOR = 0.5
-LEARNING_RATE_SCALE_POSITION = 0.5
+LEARNING_RATE_CONSTANT_LINEAR_STARTING_FACTOR = 1
+LEARNING_RATE_SCALE_POSITION = 1
 #######################################################
 
 #######################################################
@@ -121,7 +121,7 @@ CACHE_LATENTS = True
 TRAIN_UNET = True
 STEP_RATIO_OF_TEXT_ENCODER_TRAINING = 0.75
 OFFSET_NOISE = 0
-FREEZE_CLIP_NORMALIZATION_LAYERS = False
+FREEZE_CLIP_NORMALIZATION_LAYERS = True
 CLIP_SKIP = 1
 WEIGHT_DECAY = 0.1
 TENC_WEIGHT_DECAY = 0.1
@@ -181,7 +181,7 @@ SAMPLE_PROMPT_TEMPLATE_FILE = ''
 #######################################################
 # Class Image Generation
 #######################################################
-CLASS_IMAGES_PER_INSTANCE_IMAGE = 100
+CLASS_IMAGES_PER_INSTANCE_IMAGE = 50
 CLASSIFICATION_CFG_SCALE = 7.5
 CLASSIFICATION_STEPS = 40
 #######################################################

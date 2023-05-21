@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import requests
 
-URL = 'http://172.30.61.140:7860'
+URL = 'http://172.17.1.140:7860'
 
 
 def get_image(response):

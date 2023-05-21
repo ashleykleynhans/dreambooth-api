@@ -5,7 +5,7 @@ import requests
 # TODO: Not currently working due to a bug in resolving
 # the model path - see https://github.com/d8ahazard/sd_dreambooth_extension/issues/1230
 
-URL = 'http://172.30.61.140:7860'
+URL = 'http://172.17.1.140:7860'
 MODEL_NAME = 'test-model'
 
 

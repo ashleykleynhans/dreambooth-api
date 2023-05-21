@@ -2,7 +2,7 @@
 import json
 import requests
 
-URL = 'http://172.30.61.140:7860'
+URL = 'http://172.17.1.140:7860'
 
 
 def get_status():
@@ -14,7 +14,8 @@ def get_status():
 
     print(r.status_code)
     response_text = r.json()
-    print(json.dumps(response_text, indent=4, default=str))
+    current_state = json.loads(response_text['current_state'])
+    print(json.dumps(current_state, indent=4, default=str))
 
 
 if __name__ == '__main__':

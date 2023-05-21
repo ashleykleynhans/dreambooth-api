@@ -4,7 +4,7 @@ import requests
 
 # FIXME: TypeError: Object of type Concept is not JSON serializable
 
-URL = 'http://172.30.61.140:7860'
+URL = 'http://172.17.1.140:7860'
 MODEL_NAME = 'test-model'
 
 
