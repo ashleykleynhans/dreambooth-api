@@ -61,7 +61,7 @@ MODEL_EPOCH = 0
 V2_MODEL = False
 HAS_EMA = False
 TRAIN_UNFROZEN = True
-SCHEDULER = Scheduler.DDPM.value
+SCHEDULER = Scheduler.DDIM.value
 
 #######################################################
 # General
@@ -76,7 +76,7 @@ TRAIN_IMAGIC_ONLY = False
 TRAINING_STEPS_PER_IMAGE = 200
 PAUSE_AFTER_N_EPOCHS = 0
 AMOUNT_OF_TIME_TO_PAUSE_BETWEEN_EPOCHS = 0
-SAVE_MODEL_FREQUENCY = 10
+SAVE_MODEL_FREQUENCY = 0
 SAVE_PREVIEW_FREQUENCY = 0
 
 #######################################################
@@ -91,8 +91,8 @@ GRADIENT_CHECKPOINTING = False
 #######################################################
 # Learning Rate
 #######################################################
-LEARNING_RATE = 0.0000001
-TEXT_ENCODER_LEARNING_RATE = 0.0000001
+LEARNING_RATE = 0.0000002
+TEXT_ENCODER_LEARNING_RATE = 0.0000002
 LORA_UNET_LEARNING_RATE = 0.000001
 LORA_TEXT_ENCODER_LEARNING_RATE = 0.000005
 LEARNING_RATE_SCHEDULER = LearningRateScheduler.CONSTANT_WITH_WARMUP.value
@@ -120,8 +120,9 @@ MEMORY_ATTENTION = 'default'
 CACHE_LATENTS = True
 TRAIN_UNET = True
 STEP_RATIO_OF_TEXT_ENCODER_TRAINING = 0.75
+# Set offset noise for Black/white
 OFFSET_NOISE = 0
-FREEZE_CLIP_NORMALIZATION_LAYERS = True
+FREEZE_CLIP_NORMALIZATION_LAYERS = False
 CLIP_SKIP = 1
 WEIGHT_DECAY = 0.1
 TENC_WEIGHT_DECAY = 0.1
@@ -265,7 +266,7 @@ CONCEPTS = [
 ]
 
 PAYLOAD = {
-    'weight_decay': WEIGHT_DECAY,
+    'adamw_weight_decay': WEIGHT_DECAY,
     'attention': MEMORY_ATTENTION,
     'cache_latents': CACHE_LATENTS,
     'clip_skip': CLIP_SKIP,
