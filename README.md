@@ -18,6 +18,24 @@ I have also discovered that it is better to disable `xformers`
 for training and rather set memory attention to `default`, and
 that Torch version `1.13.1` works better than Torch version 2.
 
+You can downgrade Torch as follows
+
+```bash
+cd stable-diffusion-webui
+source venv/bin/activate
+pip3 install torch==1.13.1 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117
+pip uninstall xformers
+pip install https://huggingface.co/MonsterMMORPG/SECourses/resolve/main/xformers-0.0.19-cp310-cp310-manylinux2014_x86_64.whl
+```
+
+You should ensure that the versions of the Python dependencies
+in the `requirements.txt` file for the Dreambooth extension
+match the versions in the `requirments.txt` and
+`requirements_versions.txt` files of the Automatic1111 Web
+UI, and update the ones that don't match in the Automatic1111
+Web UI, otherwise the Web UI will revert the dependencies
+each time its started and will result in a slow start-up time.
+
 ## Step 1 - Clone the repository
 
 ```bash
@@ -53,84 +71,75 @@ Install the required Python dependencies:
 pip3 install -r requirements.txt
 ```
 
-## Step 3 - Create a new Dreambooth model to train
+## Step 3 - Update the configuration file
+
+Edit `config.yml` and update the appropriate
+configuration settings.
+
+## Step 4 - Create a new Dreambooth model to train
 
 You need to start of by creating a new Dreambooth model
 to train.
 
-You can do this by editing the `create_model.py` script,
-updating `URL` to the URL of your Stable Diffusion WebUI
-instance, updating `NEW_MODEL_NAME` to the name of the new
-Dreambooth model that you would like to create, updating
-`SRC_MODEL` to the name of the model that you would like
-to base your new Dreambooth model off of, and then running
-the script:
+You can do this by running the script:
 
 ```bash
 python3 create_model.py
 ```
 
-## Step 4 - Configure your newly created Dreambooth model
+## Step 5 - Configure your newly created Dreambooth model
 
 Once you have created your new Dreambooth model for
 training, you need to configure it.
 
-You can do this by editing the `set_model_config.py` script,
-updating `URL` to the URL of your Stable Diffusion WebUI
-instance, updating the rest of the variables to your
-requirements for training purposes, and then running the
-script:
+You can do this by running the script:
 
 ```bash
 python3 set_model_config.py
 ```
 
-## Step 5 - Start training your Dreambooth model
+## Step 6 - Start training your Dreambooth model
 
 Once you have created your new Dreambooth model and
 configured it, you can proceed to train it.
 
-You can do this by editing the `start_training.py` script,
-updating `URL` to the URL of your Stable Diffusion WebUI
-instance, updating `MODEL_NAME` to your newly created
-Dreambooth model, and then running the script:
+You can do this by running the script:
 
 ```bash
 python3 start_training.py
 ```
 
 Training can be cancelled at any time, by running
-the `cancel_training.py` script (see Step 7 below).
+the `cancel_training.py` script (see Step 8 below).
 
-## Step 6 - Check Status
+## Step 7 - Check Status
 
 Once you have started training your new Dreambooth
 model, you can check the progress and get status
 images.
 
-### Step 6 (a) - Check Progress
+### Step 7 (a) - Check Progress
 
-__TODO__: There is currently an issue with the API,
-see the [Github issue](https://github.com/d8ahazard/sd_dreambooth_extension/issues/1228).
+You can check the progress of your training by
+running the script:
 
-### Step 6 (b) - Get Status Images
+```bash
+python3 get_status.py
+```
 
-You can do this by editing the `get_status_images.py`
-script, updating `URL` to the URL of your Stable Diffusion
-WebUI instance, and then running the script:
+### Step 7 (b) - Get Status Images
+
+You can do this by running the script:
 
 ```bash
 python3 get_status_images.py
 ```
 
-## Step 7 - Cancel Training (Optional)
+## Step 8 - Cancel Training (Optional)
 
 If you find that your sample images are over-trained,
 or if you want to cancel training for any other
-reason, you can do so by editing the
-`cancel_training.py` script, updating `URL` to the
-URL of your Stable Diffusion WebUI instance, and
-then running the script:
+reason, you can do so by running the script:
 
 ```bash
 python3 cancel_training.py
