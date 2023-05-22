@@ -1,5 +1,23 @@
 # A collection of Python scripts for calling the REST API for the Dreambooth extension to the Automatic1111 Stable Diffusion WebUI
 
+## Overview
+
+This is a collection of Python scripts for calling the REST
+API of the [Dreambooth extension](
+https://github.com/d8ahazard/sd_dreambooth_extension) for the
+[AUTOMATIC1111 Stable Diffusion Web UI](
+https://github.com/AUTOMATIC1111/stable-diffusion-webui).
+
+After extensive testing, I have determined that the
+[v1.2.1](https://github.com/AUTOMATIC1111/stable-diffusion-webui/releases/tag/v1.2.1)
+release of the Web UI, and the [1.0.14 (unrelessed)](
+https://github.com/d8ahazard/sd_dreambooth_extension/releases/tag/1.0.14)
+version of the Dreambooth extension produce the best results.
+
+I have also discovered that it is better to disable `xformers`
+for training and rather set memory attention to `default`, and
+that Torch version `1.13.1` works better than Torch version 2.
+
 ## Step 1 - Clone the repository
 
 ```bash
