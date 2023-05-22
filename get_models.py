@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 import json
 import requests
-
-URL = 'http://172.17.1.140:7860'
+import util
 
 
 def get_models():
-    endpoint = f'{URL}/dreambooth/models'
+    url = config['webui_url']
+    endpoint = f'{url}/dreambooth/models'
 
     r = requests.get(
         endpoint
@@ -18,4 +18,5 @@ def get_models():
 
 
 if __name__ == '__main__':
+    config = util.load_config()
     get_models()

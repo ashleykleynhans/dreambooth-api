@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 import requests
-
-URL = 'http://172.17.1.140:7860'
-MODEL_NAME = 'test-model'
+import util
 
 
 def start_training():
-    endpoint = f'{URL}/dreambooth/start_training'
-    endpoint += f'?model_name={MODEL_NAME}'
+    url = config['webui_url']
+    model_name = config['new_model_name']
+
+    endpoint = f'{url}/dreambooth/start_training'
+    endpoint += f'?model_name={model_name}'
     endpoint += f'&use_tx2img=false'
 
     r = requests.post(
@@ -22,4 +23,5 @@ def start_training():
 
 
 if __name__ == '__main__':
+    config = util.load_config()
     start_training()

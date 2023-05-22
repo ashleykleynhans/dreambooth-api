@@ -1,17 +1,16 @@
 #!/usr/bin/env python3
 import json
 import requests
-
-URL = 'http://172.17.1.140:7860'
-MODEL_NAME = 'test-model'
-IMAGE_GENERATION_LIBRARY = ''
+import util
 
 
 def generate_classification_images():
-    endpoint = f'{URL}/dreambooth/classifiers'
+    url = config['webui_url']
+    model_name = config['new_model_name']
+    endpoint = f'{url}/dreambooth/classifiers'
 
     payload = {
-        'model_name':  MODEL_NAME,
+        'model_name':  model_name,
         # 'class_gen_method': IMAGE_GENERATION_LIBRARY
     }
 
@@ -31,4 +30,5 @@ def generate_classification_images():
 
 
 if __name__ == '__main__':
+    config = util.load_config()
     generate_classification_images()

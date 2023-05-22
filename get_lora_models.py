@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 import json
 import requests
-
-URL = 'http://172.17.1.140:7860'
-MODEL_NAME = 'test-model'
+import util
 
 
 def get_lora_models():
-    endpoint = f'{URL}/dreambooth/models_lora'
-    endpoint += f'?model_name={MODEL_NAME}'
+    url = config['webui_url']
+    model_name = config['new_model_name']
+
+    endpoint = f'{url}/dreambooth/models_lora'
+    endpoint += f'?model_name={model_name}'
 
     r = requests.get(
         endpoint
@@ -20,4 +21,5 @@ def get_lora_models():
 
 
 if __name__ == '__main__':
+    config = util.load_config()
     get_lora_models()

@@ -1,19 +1,20 @@
 #!/usr/bin/env python3
 import json
 import requests
+import util
 
 # TODO: Not currently working due to a bug in resolving
 # the model path - see https://github.com/d8ahazard/sd_dreambooth_extension/issues/1230
 
-URL = 'http://172.17.1.140:7860'
-MODEL_NAME = 'test-model'
-
 
 def delete_model():
-    endpoint = f'{URL}/dreambooth/model'
+    url = config['webui_url']
+    model_name = config['new_model_name']
+
+    endpoint = f'{url}/dreambooth/model'
 
     payload = {
-        'model_name': MODEL_NAME
+        'model_name': model_name
     }
 
     r = requests.delete(
@@ -31,4 +32,5 @@ def delete_model():
 
 
 if __name__ == '__main__':
+    config = util.load_config()
     delete_model()

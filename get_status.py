@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 import json
 import requests
-
-URL = 'http://172.17.1.140:7860'
+import util
 
 
 def get_status():
-    endpoint = f'{URL}/dreambooth/status'
+    url = config['webui_url']
+    endpoint = f'{url}/dreambooth/status'
 
     r = requests.get(
         endpoint
@@ -19,4 +19,5 @@ def get_status():
 
 
 if __name__ == '__main__':
+    config = util.load_config()
     get_status()

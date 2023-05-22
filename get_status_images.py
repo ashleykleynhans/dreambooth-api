@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import requests
-
-URL = 'http://172.17.1.140:7860'
+import util
 
 
 def get_image(response):
@@ -27,7 +26,8 @@ def get_zip_file(response):
 
 
 def get_status_images():
-    endpoint = f'{URL}/dreambooth/status_images'
+    url = config['webui_url']
+    endpoint = f'{url}/dreambooth/status_images'
 
     r = requests.get(
         endpoint
@@ -46,4 +46,5 @@ def get_status_images():
 
 
 if __name__ == '__main__':
+    config = util.load_config()
     get_status_images()

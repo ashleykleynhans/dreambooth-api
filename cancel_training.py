@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 import requests
-
-URL = 'http://172.17.1.140:7860'
+import util
 
 
 def cancel_training():
-    endpoint = f'{URL}/dreambooth/cancel'
+    url = config['webui_url']
+    endpoint = f'{url}/dreambooth/cancel'
 
     r = requests.get(
         endpoint
@@ -19,4 +19,5 @@ def cancel_training():
 
 
 if __name__ == '__main__':
+    config = util.load_config()
     cancel_training()

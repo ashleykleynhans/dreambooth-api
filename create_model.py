@@ -1,30 +1,22 @@
 #!/usr/bin/env python3
 import requests
 import re
-
-URL = 'http://172.17.1.140:7860'
-NEW_MODEL_NAME = 'test-model'
-SRC_MODEL = 'v1-5-pruned.safetensors'
-NEW_MODEL_SCHEDULER = 'ddim'
-CREATE_FROM_HUB = 'false'
-NEW_MODEL_HUB_URL = ''
-IS_512_RESOLUTION = 'true'
-TRAIN_UNFROZEN = 'true'
-HUGGINGFACE_HUB_TOKEN = ''
-NEW_MODEL_EXTRACT_EMA = 'false'
+import util
 
 
 def create_model():
-    endpoint = f'{URL}/dreambooth/createModel'
-    endpoint += f'?new_model_name={NEW_MODEL_NAME}'
-    endpoint += f'&new_model_src={SRC_MODEL}'
-    endpoint += f'&new_model_scheduler={NEW_MODEL_SCHEDULER}'
-    endpoint += f'&create_from_hub={CREATE_FROM_HUB}'
-    # endpoint += f'&new_model_url={NEW_MODEL_HUB_URL}'
-    endpoint += f'&is_512={IS_512_RESOLUTION}'
-    endpoint += f'&train_unfrozen={TRAIN_UNFROZEN}'
-    # endpoint += f'&new_model_token={HUGGINGFACE_HUB_TOKEN}'
-    endpoint += f'&new_model_extract_ema={NEW_MODEL_EXTRACT_EMA}'
+    url = config['webui_url']
+    new_model_name = config['new_model_name']
+    source_model = config['source_model']
+    new_model_scheduler = config['new_model_scheduler']
+
+    endpoint = f'{url}/dreambooth/createModel'
+    endpoint += f'?new_model_name={new_model_name}'
+    endpoint += f'&new_model_src={source_model}'
+    endpoint += f'&new_model_scheduler={new_model_scheduler}'
+    endpoint += f'&is_512=true'
+    endpoint += '&train_unfrozen=true'
+    endpoint += '&new_model_extract_ema=false'
 
     r = requests.post(
         endpoint
@@ -38,4 +30,5 @@ def create_model():
 
 
 if __name__ == '__main__':
+    config = util.load_config()
     create_model()

@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 import json
 import requests
+import util
 
 # FIXME: TypeError: Object of type Concept is not JSON serializable
 
-URL = 'http://172.17.1.140:7860'
-MODEL_NAME = 'test-model'
-
 
 def get_concepts():
-    endpoint = f'{URL}/dreambooth/concepts'
-    endpoint += f'?model_name={MODEL_NAME}'
+    url = config['webui_url']
+    model_name = config['new_model_name']
+
+    endpoint = f'{url}/dreambooth/concepts'
+    endpoint += f'?model_name={model_name}'
 
     r = requests.get(
         endpoint
@@ -22,4 +23,5 @@ def get_concepts():
 
 
 if __name__ == '__main__':
+    config = util.load_config()
     get_concepts()

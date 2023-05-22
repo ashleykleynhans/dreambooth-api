@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 import json
 import requests
+import util
 
 # FIXME: This script is not working
 
-URL = 'http://172.17.1.140:7860'
-MODEL_NAME = 'test-model'
 CONCEPT_INDEX = -1
 
 
@@ -24,8 +23,11 @@ def get_zip_file(response):
 
 
 def get_classification_images():
-    endpoint = f'{URL}/dreambooth/classifiers'
-    endpoint += f'?model_name={MODEL_NAME}'
+    url = config['webui_url']
+    model_name = config['new_model_name']
+
+    endpoint = f'{url}/dreambooth/classifiers'
+    endpoint += f'?model_name={model_name}'
     endpoint += f'concept_idx={CONCEPT_INDEX}'
 
     r = requests.get(
@@ -48,4 +50,5 @@ def get_classification_images():
 
 
 if __name__ == '__main__':
+    config = util.load_config()
     get_classification_images()

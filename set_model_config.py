@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import json
 import requests
+import util
 from enum import Enum
 
 
@@ -48,14 +49,16 @@ class Optimizer(Enum):
     AdanIP_Dadaptation = 'AdanIP Dadaptation'
 
 
-URL = 'http://172.17.1.140:7860'
-WEBUI_INSTALLATION_PATH = '/home/ubuntu/stable-diffusion-webui'
+config = util.load_config()
+WEBUI_INSTALLATION_PATH = config['webui_installation_path']
+MODEL_PATH = config['model_path']
+SOURCE_MODEL = config['source_model']
 
 #######################################################
 # Model
 #######################################################
-MODEL_NAME = 'test-model'
-SOURCE_CHECKPOINT = '/models/ckpt/v1-5-pruned.safetensors'
+MODEL_NAME = config['new_model_name']
+SOURCE_CHECKPOINT = f'{MODEL_PATH}/{SOURCE_MODEL}'
 MODEL_REVISION = 0
 MODEL_EPOCH = 0
 V2_MODEL = False
@@ -73,11 +76,11 @@ TRAIN_IMAGIC_ONLY = False
 #######################################################
 # Intervals
 #######################################################
-TRAINING_STEPS_PER_IMAGE = 200
+TRAINING_STEPS_PER_IMAGE = config['training_steps_per_image']
 PAUSE_AFTER_N_EPOCHS = 0
 AMOUNT_OF_TIME_TO_PAUSE_BETWEEN_EPOCHS = 0
-SAVE_MODEL_FREQUENCY = 0
-SAVE_PREVIEW_FREQUENCY = 0
+SAVE_MODEL_FREQUENCY = config['save_model_frequency']
+SAVE_PREVIEW_FREQUENCY = config['save_preview_frequency']
 
 #######################################################
 # Batching
@@ -113,7 +116,7 @@ LEARNING_RATE_SCALE_POSITION = 1
 MAX_RESOLUTION = 512
 APPLY_HORIZONTAL_FLIP = False
 DYNAMIC_IMAGE_NORMALIZATION = False
-USE_EMA = True
+USE_EMA = False
 OPTIMIZER = Optimizer.Lion.value
 MIXED_PRECISION = 'fp16'
 MEMORY_ATTENTION = 'default'
@@ -143,7 +146,7 @@ MINIMUM_PRIOR_LOSS_WEIGHT = 0.1
 #######################################################
 # Sanity Samples
 #######################################################
-SANITY_SAMPLE_PROMPT = 'photo of ohwx woman by Tomer Hanuka'
+SANITY_SAMPLE_PROMPT = config['sanity_sample_prompt']
 # Negative sanity sample prompt does not appear to be supported by API
 # SANITY_SAMPLE_NEGATIVE_PROMPT = ''
 SANITY_SAMPLE_SEED = 420420
@@ -160,35 +163,35 @@ CONCEPTS_LIST_PATH = ''
 #######################################################
 # Directories
 #######################################################
-DATASET_DIRECTORY = '/home/ubuntu/training-512x512'
-CLASSIFICATION_DATASET_DIRECTORY = '/home/ubuntu/woman-images'
+DATASET_DIRECTORY = config['dataset_directory']
+CLASSIFICATION_DATASET_DIRECTORY = config['classification_dataset_directory']
 #######################################################
 # Filewords
 #######################################################
-INSTANCE_TOKEN = ''
-CLASS_TOKEN = ''
+INSTANCE_TOKEN = config['instance_token']
+CLASS_TOKEN = config['class_token']
 #######################################################
 # Training Prompts
 #######################################################
-INSTANCE_PROMPT = 'ohwx woman'
-CLASS_PROMPT = 'photo of woman'
+INSTANCE_PROMPT = config['instance_prompt']
+CLASS_PROMPT = config['class_prompt']
 CLASSIFICATION_IMAGE_NEGATIVE_PROMPT = ''
 #######################################################
 # Sample Prompts
 #######################################################
-SAMPLE_IMAGE_PROMPT = 'photo of ohwx woman'
+SAMPLE_IMAGE_PROMPT = config['sample_image_prompt']
 SAMPLE_NEGATIVE_PROMPT = ''
 SAMPLE_PROMPT_TEMPLATE_FILE = ''
 #######################################################
 # Class Image Generation
 #######################################################
-CLASS_IMAGES_PER_INSTANCE_IMAGE = 50
+CLASS_IMAGES_PER_INSTANCE_IMAGE = config['class_images_per_instance_image']
 CLASSIFICATION_CFG_SCALE = 7.5
 CLASSIFICATION_STEPS = 40
 #######################################################
 # Sample Image Generation
 #######################################################
-NUMBER_OF_SAMPLES_TO_GENERATE = 1
+NUMBER_OF_SAMPLES_TO_GENERATE = config['number_of_samples_to_generate']
 SAMPLE_SEED = -1
 SAMPLE_CFG_SCALE = 7.5
 SAMPLE_STEPS = 20
@@ -207,9 +210,9 @@ USE_EMA_WEIGHTS_FOR_INFERENCE = False
 #######################################################
 HALF_MODEL = False
 SAVE_CHECKPOINT_TO_SUBDIRECTORY = True
-GENERATE_CKPT_DURING_TRAINING = True
-GENERATE_CKPT_WHEN_TRAINING_COMPLETES = True
-GENERATE_CKPT_WHEN_TRAINING_IS_CANCELED = False
+GENERATE_CKPT_DURING_TRAINING = config['generate_ckpt_during_training']
+GENERATE_CKPT_WHEN_TRAINING_COMPLETES = config['generate_ckpt_when_training_completes']
+GENERATE_CKPT_WHEN_TRAINING_IS_CANCELED = config['generate_ckpt_when_training_is_canceled']
 SAVE_SAFETENSORS = True
 #######################################################
 # Lora
@@ -370,7 +373,8 @@ PAYLOAD = {
 
 
 def set_model_config():
-    endpoint = f'{URL}/dreambooth/model_config'
+    url = config['webui_url']
+    endpoint = f'{url}/dreambooth/model_config'
 
     r = requests.post(
         endpoint,
