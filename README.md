@@ -36,6 +36,12 @@ UI, and update the ones that don't match in the Automatic1111
 Web UI, otherwise the Web UI will revert the dependencies
 each time its started and will result in a slow start-up time.
 
+It is recommended to use a GPU instance with at least 16GB
+of VRAM, but preferably more to prevent GPU OOM errors,
+and you will need at least 32GB of memory for Dreambooth
+training, otherwise the Web UI will be OOM killed by the
+system kernel.
+
 ## Step 1 - Clone the repository
 
 ```bash
