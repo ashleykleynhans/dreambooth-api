@@ -1,9 +1,9 @@
 ---
-webui_url: http://172.17.1.140:7860
+webui_url: http://172.17.3.140:7860
 webui_installation_path: /home/ubuntu/stable-diffusion-webui
 model_path: /home/ubuntu/stable-diffusion-webui/models/Stable-diffusion
 source_model: v1-5-pruned.safetensors
-new_model_name: test-ema-prediction
+new_model_name: ashley-config-test
 new_model_scheduler: ddim
 training_steps_per_image: 200
 class_images_per_instance_image: 50
@@ -11,7 +11,7 @@ save_model_frequency: 0
 save_preview_frequency: 0
 sanity_sample_prompt: photo of ohwx woman by Tomer Hanuka
 dataset_directory: /home/ubuntu/training-512x512
-classification_dataset_directory: /home/ubuntu/woman-images-sd
+classification_dataset_directory: /home/ubuntu/woman-images
 instance_token: ''
 class_token: ''
 instance_prompt: ohwx woman

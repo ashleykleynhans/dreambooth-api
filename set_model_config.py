@@ -64,7 +64,7 @@ MODEL_EPOCH = 0
 V2_MODEL = False
 HAS_EMA = False
 TRAIN_UNFROZEN = True
-SCHEDULER = Scheduler.DDIM.value
+SCHEDULER = Scheduler.UniPCMultistep.value
 
 #######################################################
 # General
@@ -102,12 +102,12 @@ LEARNING_RATE_SCHEDULER = LearningRateScheduler.CONSTANT_WITH_WARMUP.value
 #######################################################
 # Constant with Warmup Learning Rate Settings
 #######################################################
-LEARNING_RATE_WARMUP_STEPS = 0
+LEARNING_RATE_WARMUP_STEPS = 500
 #######################################################
 # OR Constant Learning Rate Settings
 #######################################################
-LEARNING_RATE_CONSTANT_LINEAR_STARTING_FACTOR = 1
-LEARNING_RATE_SCALE_POSITION = 1
+LEARNING_RATE_CONSTANT_LINEAR_STARTING_FACTOR = 0.5
+LEARNING_RATE_SCALE_POSITION = 0.5
 #######################################################
 
 #######################################################
@@ -125,11 +125,11 @@ TRAIN_UNET = True
 STEP_RATIO_OF_TEXT_ENCODER_TRAINING = 0.75
 # Set offset noise for Black/white
 OFFSET_NOISE = 0
-FREEZE_CLIP_NORMALIZATION_LAYERS = False
-CLIP_SKIP = 1
+FREEZE_CLIP_NORMALIZATION_LAYERS = True
+CLIP_SKIP = 2
 WEIGHT_DECAY = 0.1
 TENC_WEIGHT_DECAY = 0.1
-TENC_GRADIENT_CLIP_NORM = 0
+TENC_GRADIENT_CLIP_NORM = 6
 PAD_TOKENS = True
 STRICT_TOKENS = False
 SHUFFLE_TAGS = False
@@ -203,7 +203,7 @@ SAMPLE_STEPS = 20
 # General
 #######################################################
 CUSTOM_MODEL_NAME = ''
-SAVE_EMA_WEIGHTS_TO_GENERATED_MODELS = False
+SAVE_EMA_WEIGHTS_TO_GENERATED_MODELS = True
 USE_EMA_WEIGHTS_FOR_INFERENCE = False
 #######################################################
 # Checkpoints
