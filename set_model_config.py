@@ -64,7 +64,7 @@ MODEL_EPOCH = 0
 V2_MODEL = False
 HAS_EMA = False
 TRAIN_UNFROZEN = True
-SCHEDULER = Scheduler.UniPCMultistep.value
+SCHEDULER = Scheduler.DDIM.value
 
 #######################################################
 # General
@@ -102,7 +102,7 @@ LEARNING_RATE_SCHEDULER = LearningRateScheduler.CONSTANT_WITH_WARMUP.value
 #######################################################
 # Constant with Warmup Learning Rate Settings
 #######################################################
-LEARNING_RATE_WARMUP_STEPS = 500
+LEARNING_RATE_WARMUP_STEPS = 0
 #######################################################
 # OR Constant Learning Rate Settings
 #######################################################
@@ -125,11 +125,11 @@ TRAIN_UNET = True
 STEP_RATIO_OF_TEXT_ENCODER_TRAINING = 0.75
 # Set offset noise for Black/white
 OFFSET_NOISE = 0
-FREEZE_CLIP_NORMALIZATION_LAYERS = True
-CLIP_SKIP = 2
+FREEZE_CLIP_NORMALIZATION_LAYERS = False
+CLIP_SKIP = 1
 WEIGHT_DECAY = 0.1
 TENC_WEIGHT_DECAY = 0.1
-TENC_GRADIENT_CLIP_NORM = 6
+TENC_GRADIENT_CLIP_NORM = 0
 PAD_TOKENS = True
 STRICT_TOKENS = False
 SHUFFLE_TAGS = False
@@ -203,13 +203,13 @@ SAMPLE_STEPS = 20
 # General
 #######################################################
 CUSTOM_MODEL_NAME = ''
-SAVE_EMA_WEIGHTS_TO_GENERATED_MODELS = True
+SAVE_EMA_WEIGHTS_TO_GENERATED_MODELS = False
 USE_EMA_WEIGHTS_FOR_INFERENCE = False
 #######################################################
 # Checkpoints
 #######################################################
 HALF_MODEL = False
-SAVE_CHECKPOINT_TO_SUBDIRECTORY = True
+SAVE_CHECKPOINT_TO_SUBDIRECTORY = False
 GENERATE_CKPT_DURING_TRAINING = config['generate_ckpt_during_training']
 GENERATE_CKPT_WHEN_TRAINING_COMPLETES = config['generate_ckpt_when_training_completes']
 GENERATE_CKPT_WHEN_TRAINING_IS_CANCELED = config['generate_ckpt_when_training_is_canceled']
