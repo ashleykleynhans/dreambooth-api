@@ -106,8 +106,8 @@ LEARNING_RATE_WARMUP_STEPS = 0
 #######################################################
 # OR Constant Learning Rate Settings
 #######################################################
-LEARNING_RATE_CONSTANT_LINEAR_STARTING_FACTOR = 0.5
-LEARNING_RATE_SCALE_POSITION = 0.5
+LEARNING_RATE_CONSTANT_LINEAR_STARTING_FACTOR = 1
+LEARNING_RATE_SCALE_POSITION = 1
 #######################################################
 
 #######################################################
@@ -116,7 +116,7 @@ LEARNING_RATE_SCALE_POSITION = 0.5
 MAX_RESOLUTION = 512
 APPLY_HORIZONTAL_FLIP = False
 DYNAMIC_IMAGE_NORMALIZATION = False
-USE_EMA = False
+USE_EMA = True
 OPTIMIZER = Optimizer.Lion.value
 MIXED_PRECISION = 'fp16'
 MEMORY_ATTENTION = 'default'
