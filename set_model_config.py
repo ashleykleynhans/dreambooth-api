@@ -94,11 +94,11 @@ GRADIENT_CHECKPOINTING = False
 #######################################################
 # Learning Rate
 #######################################################
-LEARNING_RATE = 0.0000002
-TEXT_ENCODER_LEARNING_RATE = 0.0000002
+DREAMBOOTH_UNET_LEARNING_RATE = 0.0000002
+DREAMBOOTH_TEXT_ENCODER_LEARNING_RATE = 0.0000001
 LORA_UNET_LEARNING_RATE = 0.000001
 LORA_TEXT_ENCODER_LEARNING_RATE = 0.000005
-LEARNING_RATE_SCHEDULER = LearningRateScheduler.CONSTANT_WITH_WARMUP.value
+LEARNING_RATE_SCHEDULER = LearningRateScheduler.LINEAR.value
 #######################################################
 # Constant with Warmup Learning Rate Settings
 #######################################################
@@ -293,8 +293,8 @@ PAYLOAD = {
     'hflip': APPLY_HORIZONTAL_FLIP,
     'infer_ema': USE_EMA_WEIGHTS_FOR_INFERENCE,
     'initial_revision': MODEL_REVISION,
-    'learning_rate': LEARNING_RATE,
-    'learning_rate_min': 0.000001,
+    'learning_rate': DREAMBOOTH_UNET_LEARNING_RATE,
+    'learning_rate_min': 0.0000001,
     'lifetime_revision': MODEL_REVISION,
     'lora_learning_rate': LORA_UNET_LEARNING_RATE,
     'lora_model_name': '',
@@ -361,7 +361,7 @@ PAYLOAD = {
     'train_imagic': TRAIN_IMAGIC_ONLY,
     'train_unet': TRAIN_UNET,
     'train_unfrozen': TRAIN_UNFROZEN,
-    'txt_learning_rate': TEXT_ENCODER_LEARNING_RATE,
+    'txt_learning_rate': DREAMBOOTH_TEXT_ENCODER_LEARNING_RATE,
     'use_concepts': USE_CONCEPTS_LIST,
     'use_ema': USE_EMA,
     'use_lora': USE_LORA,

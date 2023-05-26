@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import json
 import requests
 import re
 import util
@@ -23,10 +24,15 @@ def create_model():
     )
 
     response_text = r.json()
-    match = re.findall('Checkpoint successfully extracted to (.*)', response_text)
 
-    if match:
-        print(f'Model path: {match[0]}')
+    if r.status_code == 200:
+        match = re.findall('Checkpoint successfully extracted to (.*)', response_text)
+
+        if match:
+            print(f'Model path: {match[0]}')
+    else:
+        print(r.status_code)
+        print(json.dumps(response_text, indent=4, default=str))
 
 
 if __name__ == '__main__':
