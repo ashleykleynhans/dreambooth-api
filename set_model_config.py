@@ -122,7 +122,7 @@ MIXED_PRECISION = 'fp16'
 MEMORY_ATTENTION = 'default'
 CACHE_LATENTS = True
 TRAIN_UNET = True
-STEP_RATIO_OF_TEXT_ENCODER_TRAINING = 0.75
+STEP_RATIO_OF_TEXT_ENCODER_TRAINING = 0.40
 # Set offset noise for Black/white
 OFFSET_NOISE = 0
 FREEZE_CLIP_NORMALIZATION_LAYERS = False
@@ -208,7 +208,7 @@ USE_EMA_WEIGHTS_FOR_INFERENCE = False
 #######################################################
 # Checkpoints
 #######################################################
-HALF_MODEL = False
+HALF_MODEL = True
 SAVE_CHECKPOINT_TO_SUBDIRECTORY = False
 GENERATE_CKPT_DURING_TRAINING = config['generate_ckpt_during_training']
 GENERATE_CKPT_WHEN_TRAINING_COMPLETES = config['generate_ckpt_when_training_completes']
