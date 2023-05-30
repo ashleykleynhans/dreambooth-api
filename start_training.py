@@ -2,6 +2,8 @@
 import requests
 import util
 
+USE_TXT2IMG = True
+
 
 def start_training():
     url = config['webui_url'].rstrip('/')
@@ -9,7 +11,7 @@ def start_training():
 
     endpoint = f'{url}/dreambooth/start_training'
     endpoint += f'?model_name={model_name}'
-    endpoint += f'&use_tx2img=false'
+    endpoint += f'&use_txt2img={str(USE_TXT2IMG).lower()}'
 
     r = requests.post(
         endpoint
