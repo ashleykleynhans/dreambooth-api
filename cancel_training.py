@@ -4,7 +4,7 @@ import util
 
 
 def cancel_training():
-    url = config['webui_url']
+    url = config['webui_url'].rstrip('/')
     endpoint = f'{url}/dreambooth/cancel'
 
     r = requests.get(

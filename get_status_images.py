@@ -26,7 +26,7 @@ def get_zip_file(response):
 
 
 def get_status_images():
-    url = config['webui_url']
+    url = config['webui_url'].rstrip('/')
     endpoint = f'{url}/dreambooth/status_images'
 
     r = requests.get(

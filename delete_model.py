@@ -8,7 +8,7 @@ import util
 
 
 def delete_model():
-    url = config['webui_url']
+    url = config['webui_url'].rstrip('/')
     model_name = config['new_model_name']
 
     endpoint = f'{url}/dreambooth/model'

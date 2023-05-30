@@ -5,7 +5,7 @@ import util
 
 
 def get_status():
-    url = config['webui_url']
+    url = config['webui_url'].rstrip('/')
     endpoint = f'{url}/dreambooth/status'
 
     r = requests.get(

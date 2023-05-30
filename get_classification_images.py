@@ -23,7 +23,7 @@ def get_zip_file(response):
 
 
 def get_classification_images():
-    url = config['webui_url']
+    url = config['webui_url'].rstrip('/')
     model_name = config['new_model_name']
 
     endpoint = f'{url}/dreambooth/classifiers'

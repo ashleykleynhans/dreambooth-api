@@ -4,9 +4,13 @@ import requests
 import re
 import util
 
+IS_512 = True
+TRAIN_UNFROZEN = True
+EXTRACT_EMA = True
+
 
 def create_model():
-    url = config['webui_url']
+    url = config['webui_url'].rstrip('/')
     new_model_name = config['new_model_name']
     source_model = config['source_model']
     new_model_scheduler = config['new_model_scheduler']
@@ -15,9 +19,9 @@ def create_model():
     endpoint += f'?new_model_name={new_model_name}'
     endpoint += f'&new_model_src={source_model}'
     endpoint += f'&new_model_scheduler={new_model_scheduler}'
-    endpoint += f'&is_512=true'
-    endpoint += '&train_unfrozen=true'
-    endpoint += '&new_model_extract_ema=false'
+    endpoint += f'&is_512={str(IS_512).lower()}'
+    endpoint += f'&train_unfrozen={str(TRAIN_UNFROZEN).lower()}'
+    endpoint += f'&new_model_extract_ema={str(EXTRACT_EMA).lower()}'
 
     r = requests.post(
         endpoint

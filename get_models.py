@@ -5,7 +5,7 @@ import util
 
 
 def get_models():
-    url = config['webui_url']
+    url = config['webui_url'].rstrip('/')
     endpoint = f'{url}/dreambooth/models'
 
     r = requests.get(

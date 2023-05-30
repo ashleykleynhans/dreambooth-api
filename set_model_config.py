@@ -62,7 +62,7 @@ SOURCE_CHECKPOINT = f'{MODEL_PATH}/{SOURCE_MODEL}'
 MODEL_REVISION = 0
 MODEL_EPOCH = 0
 V2_MODEL = False
-HAS_EMA = False
+HAS_EMA = True
 TRAIN_UNFROZEN = True
 SCHEDULER = Scheduler.DDIM.value
 
@@ -106,8 +106,8 @@ LEARNING_RATE_WARMUP_STEPS = 0
 #######################################################
 # OR Constant Learning Rate Settings
 #######################################################
-LEARNING_RATE_CONSTANT_LINEAR_STARTING_FACTOR = 1
-LEARNING_RATE_SCALE_POSITION = 1
+LEARNING_RATE_CONSTANT_LINEAR_STARTING_FACTOR = 0.5
+LEARNING_RATE_SCALE_POSITION = 0.5
 #######################################################
 
 #######################################################
@@ -203,7 +203,7 @@ SAMPLE_STEPS = 20
 # General
 #######################################################
 CUSTOM_MODEL_NAME = ''
-SAVE_EMA_WEIGHTS_TO_GENERATED_MODELS = False
+SAVE_EMA_WEIGHTS_TO_GENERATED_MODELS = True
 USE_EMA_WEIGHTS_FOR_INFERENCE = False
 #######################################################
 # Checkpoints
@@ -373,7 +373,7 @@ PAYLOAD = {
 
 
 def set_model_config():
-    url = config['webui_url']
+    url = config['webui_url'].rstrip('/')
     endpoint = f'{url}/dreambooth/model_config'
 
     r = requests.post(
