@@ -4,9 +4,9 @@ import requests
 import re
 import util
 
-IS_512 = True
+MODEL_TYPE = 'v1x'
 TRAIN_UNFROZEN = True
-EXTRACT_EMA = True
+EXTRACT_EMA = False
 
 
 def create_model():
@@ -19,7 +19,7 @@ def create_model():
     endpoint += f'?new_model_name={new_model_name}'
     endpoint += f'&new_model_src={source_model}'
     endpoint += f'&new_model_scheduler={new_model_scheduler}'
-    endpoint += f'&is_512={str(IS_512).lower()}'
+    endpoint += f'&model_type={MODEL_TYPE.lower()}'
     endpoint += f'&train_unfrozen={str(TRAIN_UNFROZEN).lower()}'
     endpoint += f'&new_model_extract_ema={str(EXTRACT_EMA).lower()}'
 
@@ -30,10 +30,7 @@ def create_model():
     response_text = r.json()
 
     if r.status_code == 200:
-        match = re.findall('Checkpoint successfully extracted to (.*)', response_text)
-
-        if match:
-            print(f'Model path: {match[0]}')
+        print(response_text)
     else:
         print(r.status_code)
         print(json.dumps(response_text, indent=4, default=str))

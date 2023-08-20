@@ -12,10 +12,14 @@ def get_status():
         endpoint
     )
 
-    print(r.status_code)
-    response_text = r.json()
-    current_state = json.loads(response_text['current_state'])
-    print(json.dumps(current_state, indent=4, default=str))
+    resp_json = r.json()
+
+    if r.status_code == 200:
+        current_state = json.loads(resp_json['current_state'])
+        print(json.dumps(current_state, indent=4, default=str))
+    else:
+        print(r.status_code)
+        print(json.dumps(resp_json, indent=4, default=str))
 
 
 if __name__ == '__main__':

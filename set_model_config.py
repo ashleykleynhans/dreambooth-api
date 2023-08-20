@@ -45,8 +45,9 @@ class Optimizer(Enum):
     AdamW_8bit = '8bit AdamW'
     Lion = 'Lion'
     AdamW_Dadaptation = 'AdamW Dadaptation'
+    Lion_Dadaptation = 'Lion Dadaptation'
     Adan_Dadaptation = 'Adan Dadaptation'
-    AdanIP_Dadaptation = 'AdanIP Dadaptation'
+    SGD_Dadaptation = 'SGD Dadaptation'
 
 
 config = util.load_config()
@@ -62,7 +63,7 @@ SOURCE_CHECKPOINT = f'{MODEL_PATH}/{SOURCE_MODEL}'
 MODEL_REVISION = 0
 MODEL_EPOCH = 0
 V2_MODEL = False
-HAS_EMA = True
+HAS_EMA = False
 TRAIN_UNFROZEN = True
 SCHEDULER = Scheduler.DDIM.value
 
@@ -94,21 +95,26 @@ GRADIENT_CHECKPOINTING = False
 #######################################################
 # Learning Rate
 #######################################################
+LEARNING_RATE_MIN = 0.0000001
 DREAMBOOTH_UNET_LEARNING_RATE = 0.0000002
+DREAMBOOTH_UNET_LEARNING_RATE = 0.000008
 DREAMBOOTH_TEXT_ENCODER_LEARNING_RATE = 0.0000001
 LORA_UNET_LEARNING_RATE = 0.000001
 LORA_TEXT_ENCODER_LEARNING_RATE = 0.000005
-LEARNING_RATE_SCHEDULER = LearningRateScheduler.LINEAR.value
+LEARNING_RATE_SCHEDULER = LearningRateScheduler.CONSTANT_WITH_WARMUP.value
 #######################################################
 # Constant with Warmup Learning Rate Settings
 #######################################################
 LEARNING_RATE_WARMUP_STEPS = 0
 #######################################################
-# OR Constant Learning Rate Settings
+# OR Constant/Linear Learning Rate Settings
 #######################################################
-LEARNING_RATE_CONSTANT_LINEAR_STARTING_FACTOR = 0.5
-LEARNING_RATE_SCALE_POSITION = 0.5
+LEARNING_RATE_CONSTANT_LINEAR_STARTING_FACTOR = 1
+LEARNING_RATE_SCALE_POSITION = 1
 #######################################################
+# OR Polynomial Power
+#######################################################
+LEARNING_RATE_POWER = 1
 
 #######################################################
 # Image Processing
@@ -122,13 +128,13 @@ MIXED_PRECISION = 'fp16'
 MEMORY_ATTENTION = 'default'
 CACHE_LATENTS = True
 TRAIN_UNET = True
-STEP_RATIO_OF_TEXT_ENCODER_TRAINING = 0.40
+STEP_RATIO_OF_TEXT_ENCODER_TRAINING = 0.75
 # Set offset noise for Black/white
 OFFSET_NOISE = 0
 FREEZE_CLIP_NORMALIZATION_LAYERS = False
 CLIP_SKIP = 1
-WEIGHT_DECAY = 0.1
-TENC_WEIGHT_DECAY = 0.1
+WEIGHT_DECAY = 0.10
+TENC_WEIGHT_DECAY = 0.11
 TENC_GRADIENT_CLIP_NORM = 0
 PAD_TOKENS = True
 STRICT_TOKENS = False
@@ -203,7 +209,7 @@ SAMPLE_STEPS = 20
 # General
 #######################################################
 CUSTOM_MODEL_NAME = ''
-SAVE_EMA_WEIGHTS_TO_GENERATED_MODELS = True
+SAVE_EMA_WEIGHTS_TO_GENERATED_MODELS = False
 USE_EMA_WEIGHTS_FOR_INFERENCE = False
 #######################################################
 # Checkpoints
@@ -269,7 +275,7 @@ CONCEPTS = [
 ]
 
 PAYLOAD = {
-    'adamw_weight_decay': WEIGHT_DECAY,
+    'weight_decay': WEIGHT_DECAY,
     'attention': MEMORY_ATTENTION,
     'cache_latents': CACHE_LATENTS,
     'clip_skip': CLIP_SKIP,
@@ -294,7 +300,7 @@ PAYLOAD = {
     'infer_ema': USE_EMA_WEIGHTS_FOR_INFERENCE,
     'initial_revision': MODEL_REVISION,
     'learning_rate': DREAMBOOTH_UNET_LEARNING_RATE,
-    'learning_rate_min': 0.0000001,
+    'learning_rate_min': LEARNING_RATE_MIN,
     'lifetime_revision': MODEL_REVISION,
     'lora_learning_rate': LORA_UNET_LEARNING_RATE,
     'lora_model_name': '',
@@ -306,7 +312,7 @@ PAYLOAD = {
     'lora_use_buggy_requires_grad': LORA_USE_BUGGY_REQUIRES_GRAD,
     'lr_cycles': 1,
     'lr_factor': LEARNING_RATE_CONSTANT_LINEAR_STARTING_FACTOR,
-    'lr_power': 1,
+    'lr_power': LEARNING_RATE_POWER,
     'lr_scale_pos': LEARNING_RATE_SCALE_POSITION,
     'lr_scheduler': LEARNING_RATE_SCHEDULER,
     'lr_warmup_steps': LEARNING_RATE_WARMUP_STEPS,
