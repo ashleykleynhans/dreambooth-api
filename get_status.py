@@ -15,7 +15,7 @@ def get_status():
     resp_json = r.json()
 
     if r.status_code == 200:
-        current_state = json.loads(resp_json['current_state'])
+        current_state = resp_json['current_state']
         print(json.dumps(current_state, indent=4, default=str))
     else:
         print(r.status_code)
